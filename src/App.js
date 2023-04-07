@@ -1,18 +1,15 @@
-import './App.css';
+import "./App.css";
 
-import Todo from './components/todo';
+import Todo from "./components/todo";
 
-
+// import Test from "./components/test.jsx";
 
 function App() {
   return (
-   <>
-    <Todo></Todo>
-   </>
-
-
-
-   
+    <>
+      <Todo></Todo>
+      {/* <Test /> */}
+    </>
   );
 }
 

@@ -55,18 +55,23 @@ function TodoApp() {
           <ul className="stats">
             <li>
               <span>Total</span>
-              <span id="total-task">0</span>
+              <span id="total-task">{todoList.length}</span>
             </li>
           </ul>
-
-          <ul className="todos">
-            {todoList.map((item, index) => (
-              <li key={index}>
-                {item}
-                <button onClick={() => removeTodo(index)}>Remove</button>
-              </li>
-            ))}
-          </ul>
+          {/* get the total number of items */}
+          {todoList.length === 0 ? (
+            <p>Your todo list is empty please add some task</p>
+          ) : (
+            <ul className="todos">
+              {todoList.map((item, index) => (
+                <li key={index}>
+                  {item}
+                  <button onClick={() => removeTodo(index)}>Remove</button>
+                </li>
+              ))}
+            </ul>
+          )}
+          {console.log(todoList)}
         </div>
       </section>
     </>
