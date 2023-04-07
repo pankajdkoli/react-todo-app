@@ -71,7 +71,6 @@ function TodoApp() {
               ))}
             </ul>
           )}
-          {console.log(todoList)}
         </div>
       </section>
     </>
