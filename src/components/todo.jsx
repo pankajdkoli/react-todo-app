@@ -83,6 +83,7 @@ function TodoApp() {
               <span id="total-task">{todoList.length}</span>
             </li>
           </ul>
+
           {/* get the total number of items */}
           {todoList.length === 0 ? (
             <p>Your todo list is empty please add some task</p>
