@@ -2,23 +2,43 @@ import React, { useState, useEffect } from "react";
 import "./todo.css";
 
 function TodoApp() {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(
+    JSON.parse(localStorage.getItem("todoList")) || []
+  );
+
   const [remainingTasks, setRemainingTasks] = useState(0);
   const [completedTasks, setCompletedTasks] = useState(0);
 
-  //add todo in ui
+  // //add todo in ui
+  // const addTodo = (todoItem) => {
+  //   if (todoItem.trim() === "") return;
+  //   // Save the updated todo list to local storage
+  //   setTodoList([...todoList, { task: todoItem }]);
+  // };
+
   const addTodo = (todoItem) => {
     if (todoItem.trim() === "") return;
-    setTodoList([...todoList, { task: todoItem, completed: false }]);
+    const updatedTodoList = [...todoList, { task: todoItem }];
+    setTodoList(updatedTodoList);
+    localStorage.setItem("todoList", JSON.stringify(updatedTodoList));
   };
 
   useEffect(() => {
-    const storedTodoList = JSON.parse(localStorage.getItem("todoList"));
-    if (storedTodoList) {
-      setTodoList(storedTodoList);
+    if (!todoList) {
+      const save = localStorage.setItem("todoList", JSON.stringify(todoList));
+      console.log(save);
     }
-  }, []);
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  }, [todoList]);
 
+  useEffect(() => {
+    const storedTodoList = localStorage.getItem("todoList");
+    if (storedTodoList) {
+      setTodoList(JSON.parse(storedTodoList));
+    }
+  }, [setTodoList]);
+
+  //everytime todos list changes, save the current state to local storage
   useEffect(() => {
     const remaining = todoList.filter((item) => !item.completed).length;
     setRemainingTasks(remaining);
@@ -30,13 +50,13 @@ function TodoApp() {
     const updatedTodoList = [...todoList];
     updatedTodoList[index].completed = !updatedTodoList[index].completed;
     setTodoList(updatedTodoList);
+    localStorage.setItem("todoList", JSON.stringify(updatedTodoList));
   };
 
   const removeTodo = (index) => {
     const updatedTodoList = [...todoList];
     updatedTodoList.splice(index, 1);
     setTodoList(updatedTodoList);
-    // Save the updated todo list to local storage
     localStorage.setItem("todoList", JSON.stringify(updatedTodoList));
   };
 
@@ -44,8 +64,8 @@ function TodoApp() {
     const updatedTodoList = [...todoList];
     updatedTodoList[index].task = newTask;
     setTodoList(updatedTodoList);
+    localStorage.setItem("todoList", JSON.stringify(updatedTodoList));
   };
-
   return (
     <>
       <header className="container" id="main-herder">
@@ -88,31 +108,33 @@ function TodoApp() {
           {todoList.length === 0 ? (
             <p>Your todo list is empty please add some task</p>
           ) : (
-            <ul className="todos">
-              {todoList.map((item, index) => (
-                <li key={index} className={item.completed ? "completed" : ""}>
-                  <button
-                    className="list-button"
-                    onClick={() => CompletedTodo(index)}
-                  >
-                    {item.completed ? "✔" : " "}
-                  </button>
+            <div className="container" id="main-content">
+              <ul className="todos">
+                {todoList.map((item, index) => (
+                  <li key={index} className={item.completed ? "completed" : ""}>
+                    <button
+                      className="list-button"
+                      onClick={() => CompletedTodo(index)}
+                    >
+                      {item.completed ? "✔" : " "}
+                    </button>
 
-                  <input
-                    type="text"
-                    defaultValue={item.task}
-                    onBlur={(e) => editTodo(index, e.target.value)}
-                  />
+                    <input
+                      type="text"
+                      defaultValue={item.task}
+                      onBlur={(e) => editTodo(index, e.target.value)}
+                    />
 
-                  <button
-                    className="list-button"
-                    onClick={() => removeTodo(index)}
-                  >
-                    X
-                  </button>
-                </li>
-              ))}
-            </ul>
+                    <button
+                      className="list-button"
+                      onClick={() => removeTodo(index)}
+                    >
+                      X
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
       </section>
