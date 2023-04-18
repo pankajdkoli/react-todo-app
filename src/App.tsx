@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import InputTodo from "./components/InputTodo";
 import { Todo } from "./components/model";
@@ -13,6 +13,11 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(newTodo));
     setTodos(newTodo);
   };
+  //get data from local storage
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem("todos") || "[]");
+    setTodos(storedTodos);
+  }, []);
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,9 +43,6 @@ function App() {
       <InputTodo todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
       <li className="todolist">{/* <span>{todo}</span> */}</li>
 
-      {/* {todos.map((todoList) => {
-        return <li key={todoList.id}>{todoList.todo}</li>;
-      })} */}
       <div className="container" id="main-content">
         <ul className="todos">
           Todo List
@@ -55,8 +57,6 @@ function App() {
             );
           })}
         </ul>
-
-        <button className="list-button">check</button>
       </div>
     </>
   );
