@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import InputTodo from "./components/InputTodo";
-import { Todo } from "./components/model";
+import Todo from "./components/model";
 import "./components/TodoApp.css";
+import TodoList from "./components/TodoList";
 
 function App() {
   const [todo, setTodo] = useState<string>("");
@@ -37,27 +38,11 @@ function App() {
     }
   };
 
-  console.log(todos);
   return (
     <>
       <InputTodo todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
-      <li className="todolist">{/* <span>{todo}</span> */}</li>
 
-      <div className="container" id="main-content">
-        <ul className="todos">
-          Todo List
-          {todos.map((todoList) => {
-            return (
-              <li
-                key={todoList.id}
-                className={todoList.isDone ? "completed" : ""}
-              >
-                {todoList.todo}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <TodoList todos={todos} />
     </>
   );
 }

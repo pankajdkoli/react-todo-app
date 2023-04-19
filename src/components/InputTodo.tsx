@@ -1,11 +1,11 @@
 import React from "react";
 import "./TodoApp.css";
 
-interface InputTodoProps {
+type InputTodoProps = {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
   handleAdd: (e: React.FormEvent) => void; // void does not return any th
-}
+};
 
 function InputTodo({ todo, setTodo, handleAdd }: InputTodoProps) {
   return (
