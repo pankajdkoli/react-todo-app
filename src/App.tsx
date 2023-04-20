@@ -4,15 +4,16 @@ import InputTodo from "./components/InputTodo";
 import Todo from "./components/model";
 import "./components/TodoApp.css";
 import TodoList from "./components/TodoList";
+import ShowTask from "./components/ShowTask";
 
 function App() {
   const [todo, setTodo] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
 
   // Define the updateTodo function with the correct parameter type
-  const updateTodo = (newTodo: Todo[]) => {
-    localStorage.setItem("todos", JSON.stringify(newTodo));
-    setTodos(newTodo);
+  const updateTodo = (newTodos: Todo[]) => {
+    localStorage.setItem("todos", JSON.stringify(newTodos));
+    setTodos(newTodos);
   };
   //get data from local storage
   useEffect(() => {
@@ -41,8 +42,9 @@ function App() {
   return (
     <>
       <InputTodo todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
+      <ShowTask />
 
-      <TodoList todos={todos} />
+      <TodoList todos={todos} setTodos={setTodos} />
     </>
   );
 }

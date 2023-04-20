@@ -61,8 +61,8 @@
 }
 
 .todos {
-  margin-bottom: 4rem;
-}
+    margin-bottom: 1rem;
+  }
 
 .todos li {
   background-color: white;
