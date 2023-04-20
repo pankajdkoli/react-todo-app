@@ -1,11 +1,14 @@
 import React from "react";
 
-// interface testPros {
-//   TaskSubmit: string;
-// }
-function ShowTask({}) {
+interface ShowTaskProps {
+  TaskSubmit: string;
+}
+// const [remainingTasks, setRemainingTasks] = useState<number>(0);
+// const [completedTasks, setCompletedTasks] = useState<number>(0);
+
+function ShowTask() {
   return (
-    <section>
+    <form>
       <div className="container" id="main-content">
         <ul className="stats">
           <li>
@@ -22,7 +25,7 @@ function ShowTask({}) {
           </li>
         </ul>
       </div>
-    </section>
+    </form>
   );
 }
 
