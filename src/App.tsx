@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import InputTodo from "./components/InputTodo";
 import Todo from "./components/model";
 import "./components/TodoApp.css";
 import TodoList from "./components/TodoList";
-import ShowTask from "./components/ShowTask";
 
 function App() {
   const [todo, setTodo] = useState<string>("");
@@ -42,8 +40,6 @@ function App() {
   return (
     <>
       <InputTodo todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
-      <ShowTask />
-
       <TodoList todos={todos} setTodos={setTodos} />
     </>
   );
