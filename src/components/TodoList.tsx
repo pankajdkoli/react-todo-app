@@ -9,26 +9,24 @@ type TodoListProps = {
 
 function TodoList({ todos, setTodos }: TodoListProps) {
   return (
-    <div className="container" id="main-content">
-      <ul className="todos">
-        {todos.map((todoList) => {
-          return (
-            // <li
-            //   key={todoList.id}
-            //   className={todoList.isDone ? "completed" : ""}
-            // >
-            //   {todoList.todo}
-            // </li>
-            <SingleTodo
-              todoList={todoList}
-              key={todoList.id}
-              todos={todos}
-              setTodos={setTodos}
-            />
-          );
-        })}
-      </ul>
-    </div>
+    <>
+      {todos.map((todoList) => {
+        return (
+          // <li
+          //   key={todoList.id}
+          //   className={todoList.isDone ? "completed" : ""}
+          // >
+          //   {todoList.todo}
+          // </li>
+          <SingleTodo
+            todoList={todoList}
+            key={todoList.id}
+            todos={todos}
+            setTodos={setTodos}
+          />
+        );
+      })}
+    </>
   );
 }
 
